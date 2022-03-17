@@ -47,7 +47,7 @@ public class User {
 
     // address should have at least one
     // address needs to validate
-    @OneToMany
+    @Transient // If it's related to database, need to use "@OneToMany"
     @NotEmpty
     @Valid
     private List<Address> addresses;
