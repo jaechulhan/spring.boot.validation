@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * Custom ResponseEntity Object
- * @Author
+ * @author jaechulhan
  */
 public class ResponseHandler {
     /**
