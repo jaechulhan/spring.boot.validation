@@ -20,7 +20,7 @@ public class User {
     // username should not be null or empty
     // username should have at least 2 characters
     @NotEmpty
-    @Size(min = 2, message = "username should have at least 2 characters")
+    @Size(min = 2, message = "{validation.username.size.error}")
     private String name;
 
     // email should not be null or empty
@@ -32,13 +32,13 @@ public class User {
     // password should not be null or empty
     // password should have at least 8 characters
     @NotEmpty
-    @Size(min = 8, message = "password should have at least 8 characters")
+    @Size(min = 8, message = "{validation.password.size.error}")
     private String password;
 
     // birthday should not be null or empty
     // birthday should be MM/dd/yyyy
     @NotEmpty
-    @CheckDateFormat(pattern = "MM/dd/yyyy", message = "birthday should be MM/dd/yyyy")
+    @CheckDateFormat(pattern = "MM/dd/yyyy", message = "{validation.birthday.dateformat.error}")
     private String birthday;
 
     // gender must match "Male or Female"

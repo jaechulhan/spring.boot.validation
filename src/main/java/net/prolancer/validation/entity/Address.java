@@ -20,7 +20,7 @@ public class Address {
     @NotEmpty
     private String country;
     @NotEmpty
-    @Size(min = 5, max = 5, message = "zipcode must have 5 digits")
+    @Size(min = 5, max = 5, message = "{validation.zipcode.size.error}")
     private String zipcode;
 
     public Address() {

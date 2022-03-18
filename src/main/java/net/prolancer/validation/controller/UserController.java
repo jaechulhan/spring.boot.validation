@@ -1,5 +1,6 @@
 package net.prolancer.validation.controller;
 
+import net.prolancer.validation.common.entity.ResponseHandler;
 import net.prolancer.validation.entity.User;
 import net.prolancer.validation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/users")
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
         User savedUser = userService.createUser(user);
-        return new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
+        return ResponseHandler.ok("Successfully created", HttpStatus.CREATED, savedUser);
     }
 }
