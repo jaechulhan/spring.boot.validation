@@ -1,5 +1,6 @@
 package net.prolancer.validation.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.prolancer.validation.common.validator.CheckDateFormat;
 
 import javax.persistence.*;
@@ -13,7 +14,8 @@ import java.util.List;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
+    @JsonIgnore
     private long id;
 
     @Column(name = "name")
