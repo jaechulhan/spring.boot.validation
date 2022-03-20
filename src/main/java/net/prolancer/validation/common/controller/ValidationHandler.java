@@ -1,4 +1,4 @@
-package net.prolancer.validation.common;
+package net.prolancer.validation.common.controller;
 
 import net.prolancer.validation.common.entity.ResponseHandler;
 import org.springframework.http.HttpHeaders;

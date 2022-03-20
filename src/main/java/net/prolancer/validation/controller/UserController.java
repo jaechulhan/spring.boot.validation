@@ -1,5 +1,7 @@
 package net.prolancer.validation.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import net.prolancer.validation.common.contants.AppConstants;
 import net.prolancer.validation.common.entity.ResponseHandler;
 import net.prolancer.validation.entity.User;
 import net.prolancer.validation.service.UserService;
@@ -14,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping(AppConstants.REST_API_PREFIX)
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -25,4 +28,5 @@ public class UserController {
         User savedUser = userService.createUser(user);
         return ResponseHandler.ok("Successfully created", HttpStatus.CREATED, savedUser);
     }
+
 }
