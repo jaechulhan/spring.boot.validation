@@ -1,5 +1,6 @@
 package net.prolancer.validation.common.entity;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -10,6 +11,7 @@ import java.util.Map;
  * Custom ResponseEntity Object
  * @author jaechulhan
  */
+@Slf4j
 public class ResponseHandler {
     /**
      * Generate success response message
@@ -38,6 +40,8 @@ public class ResponseHandler {
         resMap.put("message", message);
         resMap.put("data", resObj);
 
+        log.info(">>> Success Response: {}", resMap.toString());
+
         return new ResponseEntity<>(resMap, status);
     }
 
@@ -65,6 +69,8 @@ public class ResponseHandler {
         resMap.put("httpStatus", status.value());
         resMap.put("message", message);
         resMap.put("data", resObj);
+
+        log.error(">>> Error Response: {}", resMap.toString());
 
         return new ResponseEntity<>(resMap, status);
     }

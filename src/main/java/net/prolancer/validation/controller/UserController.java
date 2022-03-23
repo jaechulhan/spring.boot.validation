@@ -38,7 +38,10 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
         User savedUser = userService.createUser(user);
-        return ResponseHandler.ok("Successfully created", HttpStatus.CREATED, savedUser);
+        log.info("User: {}", savedUser.toString());
+        return ResponseHandler.ok(messageHelper.get("default.save.success.message")
+                , HttpStatus.CREATED
+                , savedUser);
     }
 
     @PostMapping(value = "/upload", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
