@@ -18,7 +18,7 @@
         <file>${LOG_PATH}/${LOG_FILE}.log</file>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+            <Pattern>%d %p %C{1.} [%t] [%X{CorrelationFilter.UUID}][%X{CorrelationFilter.ClientIP}] %m%n</Pattern>
         </encoder>
 
         <rollingPolicy
