@@ -1,4 +1,4 @@
-package net.prolancer.validation.common.config;
+package net.prolancer.validation.common.logging;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

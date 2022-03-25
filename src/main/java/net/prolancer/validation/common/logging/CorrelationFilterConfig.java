@@ -1,4 +1,4 @@
-package net.prolancer.validation.common.config;
+package net.prolancer.validation.common.logging;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
