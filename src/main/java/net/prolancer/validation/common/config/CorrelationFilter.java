@@ -19,6 +19,7 @@ import java.util.UUID;
 @Component
 public class CorrelationFilter extends OncePerRequestFilter {
 
+    public static final String X_FORWARDED_FOR = "X-Forwarded-For";
     private final String responseHeader;
     private final String mdcTokenKey;
     private final String mdcClientIpKey;
@@ -40,15 +41,23 @@ public class CorrelationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        MutableHttpServletRequest mutableRequest = new MutableHttpServletRequest(req);
+
         try {
             final String token = extractToken(request);
             final String clientIP = extractClientIP(request);
             MDC.put(mdcClientIpKey, clientIP);
             MDC.put(mdcTokenKey, token);
-            if (StringUtils.hasText(responseHeader)) {
+            // If there is no token header
+            if (!StringUtils.hasText(request.getHeader(requestHeader))) {
+                mutableRequest.putHeader(requestHeader, token);
+            }
+            // If Response Header is enabled and there is no token header
+            if (StringUtils.hasText(responseHeader) && !StringUtils.hasText(response.getHeader(responseHeader))) {
                 response.addHeader(responseHeader, token);
             }
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(mutableRequest, response);
         } finally {
             MDC.remove(mdcTokenKey);
             MDC.remove(mdcClientIpKey);
@@ -77,8 +86,8 @@ public class CorrelationFilter extends OncePerRequestFilter {
      */
     private String extractClientIP(final HttpServletRequest request) {
         final String clientIP;
-        if (request.getHeader("X-Forwarded-For") != null) {
-            clientIP = request.getHeader("X-Forwarded-For").split(",")[0];
+        if (request.getHeader(X_FORWARDED_FOR) != null) {
+            clientIP = request.getHeader(X_FORWARDED_FOR).split(",")[0];
         } else {
             clientIP = request.getRemoteAddr();
         }

@@ -38,7 +38,6 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
         User savedUser = userService.createUser(user);
-        log.info("User: {}", savedUser.toString());
         return ResponseHandler.ok(messageHelper.get("default.save.success.message")
                 , HttpStatus.CREATED
                 , savedUser);
@@ -46,8 +45,6 @@ public class UserController {
 
     @PostMapping(value = "/upload", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<Object> uploadFile(@Valid @RequestPart("user") User user, @RequestPart(value = "file", required = false) List<MultipartFile> files) {
-        log.info("User: {}", user.toString());
-
         if (files != null) {
             int idx = 0;
             for (MultipartFile mFile : files) {

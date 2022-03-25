@@ -40,8 +40,6 @@ public class ResponseHandler {
         resMap.put("message", message);
         resMap.put("data", resObj);
 
-        log.info(">>> Success Response: {}", resMap.toString());
-
         return new ResponseEntity<>(resMap, status);
     }
 
@@ -69,8 +67,6 @@ public class ResponseHandler {
         resMap.put("httpStatus", status.value());
         resMap.put("message", message);
         resMap.put("data", resObj);
-
-        log.error(">>> Error Response: {}", resMap.toString());
 
         return new ResponseEntity<>(resMap, status);
     }
