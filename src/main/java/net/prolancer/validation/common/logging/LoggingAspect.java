@@ -13,7 +13,7 @@ import org.springframework.util.StopWatch;
 @Slf4j
 public class LoggingAspect {
 
-    @Around("execution(* net.prolancer.validation.controller..*(..)))")
+    @Around("execution(* net.prolancer.validation..*(..)))")
     public Object logMethodExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
 

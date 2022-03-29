@@ -1,6 +1,6 @@
 package net.prolancer.validation.common.logging;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -11,13 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Type;
 
 @ControllerAdvice
+@AllArgsConstructor
 public class CustomRequestBodyAdviceAdapter extends RequestBodyAdviceAdapter {
 
-    @Autowired
-    LoggingService loggingService;
+    private final LoggingService loggingService;
 
-    @Autowired
-    HttpServletRequest httpServletRequest;
+    private final HttpServletRequest httpServletRequest;
 
     @Override
     public boolean supports(MethodParameter methodParameter, Type type,

@@ -1,6 +1,6 @@
 package net.prolancer.validation.common.logging;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.boot.web.servlet.DispatcherType;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
+@AllArgsConstructor
 public class LogInterceptor implements HandlerInterceptor {
 
-    @Autowired
-    LoggingService loggingService;
+    private final LoggingService loggingService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,

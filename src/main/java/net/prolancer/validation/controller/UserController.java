@@ -1,14 +1,14 @@
 package net.prolancer.validation.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.prolancer.validation.common.contants.AppProperties;
 import net.prolancer.validation.common.config.MessageHelper;
 import net.prolancer.validation.common.contants.AppConstants;
 import net.prolancer.validation.common.entity.ResponseHandler;
 import net.prolancer.validation.entity.User;
 import net.prolancer.validation.service.UserService;
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,16 +24,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping(AppConstants.REST_API_PREFIX)
 @Slf4j
+@AllArgsConstructor
 public class UserController {
 
-    @Autowired
-    private MessageHelper messageHelper;
+    private final MessageHelper messageHelper;
 
-    @Autowired
-    private UserService userService;
+    private final AppProperties appProperties;
 
-    @Value( "${upload.file.path}" )
-    private String uploadFilePath;
+    private final UserService userService;
 
     @PostMapping("/users")
     public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
@@ -52,7 +50,7 @@ public class UserController {
                     String extension = FilenameUtils.getExtension(mFile.getOriginalFilename());
                     String fileName = UUID.randomUUID().toString().replace("-", "");
                     log.info("Files #{}: {} => {} => {}", ++idx, mFile.getName(), mFile.getOriginalFilename(), fileName + "." + extension);
-                    File file = new File(uploadFilePath + fileName + "." + extension);
+                    File file = new File(appProperties.uploadFilePath + fileName + "." + extension);
                     try {
                         mFile.transferTo(file);
                     } catch (IOException e) {
