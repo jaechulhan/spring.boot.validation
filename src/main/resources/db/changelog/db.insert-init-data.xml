@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="jaechul.h" id="2">
+        <comment>Inserting records</comment>
+        <insert tableName="TB_USER">
+            <column name="user_id" value="eb7b0af2-c9bc-4e33-8d45-d83fcf7850f6"/>
+            <column name="user_name" value="Jaechul Han"/>
+            <column name="email" value="jaechulhan@gmail.com"/>
+            <column name="password" value="Password!234"/>
+            <column name="birthday" value="04/25/1977"/>
+            <column name="gender" value="Male"/>
+        </insert>
+        <loadData
+                file="db/changelog/db.insert-api-mock-response.csv"
+                encoding="UTF-8"
+                quotchar="&quot;"
+                separator=","
+                tableName = "TB_API_MOCK_RESPONSE"
+                usePreparedStatements="true" >
+            <column header="api_id" name="api_id" type="string"/>
+            <column header="description" name="description" type="string"/>
+            <column header="response_type" name="response_type" type="string"/>
+            <column header="response_body" name="response_body" type="string"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

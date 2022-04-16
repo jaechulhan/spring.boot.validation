@@ -2,6 +2,7 @@ package net.prolancer.validation.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.prolancer.validation.common.validator.CheckDateFormat;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -14,16 +15,16 @@ import java.util.List;
 @Entity
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @JsonIgnore
-    private long id;
+    private String userId;
 
-    @Column(name = "name")
     // username should not be null or empty
     // username should have at least 2 characters
     @NotEmpty
     @Size(min = 2, message = "{validation.username.size.error}")
-    private String name;
+    private String userName;
 
     // email should not be null or empty
     // email should be a valid email format
@@ -57,28 +58,28 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String password, String birthday, String gender) {
-        this.name = name;
+    public User(String userName, String email, String password, String birthday, String gender) {
+        this.userName = userName;
         this.email = email;
         this.password = password;
         this.birthday = birthday;
         this.gender = gender;
     }
 
-    public long getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -124,8 +125,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", birthday='" + birthday + '\'' +

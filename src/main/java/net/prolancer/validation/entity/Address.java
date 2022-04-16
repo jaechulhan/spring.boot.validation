@@ -1,6 +1,7 @@
 package net.prolancer.validation.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +12,10 @@ import javax.validation.constraints.Size;
 @Entity
 public class Address {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @JsonIgnore
-    private Long id;
+    private String id;
     private String address;
     @NotEmpty
     private String city;
@@ -36,12 +38,12 @@ public class Address {
         this.zipcode = zipcode;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getId() {
+        return id;
     }
 
-    public Long getId() {
-        return id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAddress() {

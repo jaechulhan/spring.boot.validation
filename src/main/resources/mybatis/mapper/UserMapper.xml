@@ -1,0 +1,34 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.prolancer.validation.mapper.UserMapper">
+
+    <resultMap id="userMap" type="User">
+        <id column="USER_ID" property="userId" />
+        <result column="USER_NAME" property="userName" />
+        <result column="EMAIL" property="email" />
+        <result column="PASSWORD" property="password" />
+        <result column="BIRTHDAY" property="birthday" />
+        <result column="GENDER" property="gender" />
+    </resultMap>
+
+    <select id="selectUserById" parameterType="User" resultMap="userMap">
+        SELECT /* net.prolancer.validation.mapper.UserMapper.selectUserById */
+               USER_ID
+             , USER_NAME
+             , EMAIL
+             , PASSWORD
+             , BIRTHDAY
+             , GENDER
+          FROM TB_USER
+         WHERE USER_ID = #{userId}
+    </select>
+
+    <insert id="insertUser" parameterType="User">
+        INSERT /* net.prolancer.validation.mapper.UserMapper.insertUser */
+        INTO TB_USER (USER_ID, USER_NAME, EMAIL, PASSWORD, BIRTHDAY, GENDER)
+        VALUES (#{userId}, #{userName}, #{email}, #{password}, #{birthday}, #{gender})
+    </insert>
+
+</mapper>
