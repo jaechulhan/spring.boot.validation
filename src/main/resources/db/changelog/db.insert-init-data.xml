@@ -8,10 +8,10 @@
         <comment>Inserting records</comment>
         <insert tableName="TB_USER">
             <column name="user_id" value="eb7b0af2-c9bc-4e33-8d45-d83fcf7850f6"/>
-            <column name="user_name" value="Jaechul Han"/>
-            <column name="email" value="jaechulhan@gmail.com"/>
+            <column name="user_name" value="Test User"/>
+            <column name="email" value="test@dummy.com"/>
             <column name="password" value="Password!234"/>
-            <column name="birthday" value="04/25/1977"/>
+            <column name="birthday" value="12/25/2000"/>
             <column name="gender" value="Male"/>
         </insert>
         <loadData
