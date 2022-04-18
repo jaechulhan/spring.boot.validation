@@ -7,9 +7,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
+@SuppressWarnings("squid:S3008")
 public class SwaggerWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    public static String[] SWAGGER_URL_PATHS = new String[]{"/swagger-ui.html**", "/swagger-resources/**",
+    private static String[] SWAGGER_URL_PATHS = new String[]{"/swagger-ui.html**", "/swagger-resources/**",
             "/v2/api-docs**", "/webjars/**"};
 
     @Override

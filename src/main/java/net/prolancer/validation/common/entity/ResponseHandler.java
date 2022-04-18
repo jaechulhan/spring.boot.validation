@@ -12,7 +12,10 @@ import java.util.Map;
  * @author jaechulhan
  */
 @Slf4j
-public class ResponseHandler {
+public final class ResponseHandler {
+    private ResponseHandler() {
+        throw new IllegalStateException("ResponseHandler Class");
+    }
     /**
      * Generate success response message
      * @param message

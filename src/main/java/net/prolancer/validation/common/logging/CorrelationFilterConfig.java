@@ -6,6 +6,8 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
+
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "config.correlation")
@@ -21,8 +23,8 @@ public class CorrelationFilterConfig {
     private String requestHeader = null;
 
     @Bean
-    public FilterRegistrationBean servletRegistrationBean() {
-        final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+    public FilterRegistrationBean<Filter> servletRegistrationBean() {
+        final FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<>();
         final CorrelationFilter correlationFilter = new CorrelationFilter(responseHeader, mdcTokenKey, mdcClientIpKey, requestHeader);
         registrationBean.setFilter(correlationFilter);
         registrationBean.setOrder(2);

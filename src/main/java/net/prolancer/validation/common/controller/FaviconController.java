@@ -9,5 +9,6 @@ public class FaviconController {
     @GetMapping("favicon.ico")
     @ResponseBody
     void returnNoFavicon() {
+        // Do nothing - Empty
     }
 }

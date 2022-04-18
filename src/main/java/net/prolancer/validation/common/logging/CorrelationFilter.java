@@ -41,7 +41,7 @@ public class CorrelationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletRequest req = request;
         MutableHttpServletRequest mutableRequest = new MutableHttpServletRequest(req);
 
         try {

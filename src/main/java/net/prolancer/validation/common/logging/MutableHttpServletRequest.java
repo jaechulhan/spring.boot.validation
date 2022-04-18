@@ -10,13 +10,14 @@ final class MutableHttpServletRequest extends HttpServletRequestWrapper {
 
     public MutableHttpServletRequest(HttpServletRequest request){
         super(request);
-        this.customHeaders = new HashMap<String, String>();
+        this.customHeaders = new HashMap<>();
     }
 
     public void putHeader(String name, String value){
         this.customHeaders.put(name, value);
     }
 
+    @Override
     public String getHeader(String name) {
         // check the custom headers first
         String headerValue = customHeaders.get(name);
@@ -28,9 +29,10 @@ final class MutableHttpServletRequest extends HttpServletRequestWrapper {
         return ((HttpServletRequest) getRequest()).getHeader(name);
     }
 
+    @Override
     public Enumeration<String> getHeaderNames() {
         // create a set of the custom header names
-        Set<String> set = new HashSet<String>(customHeaders.keySet());
+        Set<String> set = new HashSet<>(customHeaders.keySet());
 
         // now add the headers from the wrapped request object
         @SuppressWarnings("unchecked")

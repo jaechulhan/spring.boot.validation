@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Slf4j
 public class CheckDateValidator implements ConstraintValidator<CheckDateFormat, String> {
@@ -24,7 +23,7 @@ public class CheckDateValidator implements ConstraintValidator<CheckDateFormat, 
         }
 
         try {
-            Date date = new SimpleDateFormat(pattern).parse(object);
+            new SimpleDateFormat(pattern).parse(object);
             return true;
         } catch (Exception e) {
             log.error(e.getMessage());
