@@ -15,6 +15,17 @@
             <column name="birthday" type="VARCHAR2(10)"/>
             <column name="gender" type="VARCHAR2(10)"/>
         </createTable>
+        <createTable tableName="TB_API_LOG_HISTORY">
+            <column name="corr_id" type="VARCHAR2(36)">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="api_url" type="VARCHAR2(255)"/>
+            <column name="request_message" type="CLOB"/>
+            <column name="request_date" type="TIMESTAMP"/>
+            <column name="response_message" type="CLOB"/>
+            <column name="response_date" type="TIMESTAMP"/>
+            <column name="ip_address" type="VARCHAR2(50)"/>
+        </createTable>
         <createTable tableName="TB_API_MOCK_RESPONSE">
             <column name="api_id" type="VARCHAR2(36)">
                 <constraints nullable="false" primaryKey="true" unique="true"/>

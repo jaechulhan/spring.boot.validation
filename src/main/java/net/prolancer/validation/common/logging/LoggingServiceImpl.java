@@ -1,10 +1,15 @@
 package net.prolancer.validation.common.logging;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.prolancer.validation.common.entity.ApiLog;
+import net.prolancer.validation.common.mapper.ApiLogMapper;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -12,7 +17,10 @@ import java.util.Map;
 
 @Component
 @Slf4j
+@AllArgsConstructor
 public class LoggingServiceImpl implements LoggingService {
+
+    private final ApiLogMapper apiLogMapper;
 
     @Override
     public void logRequest(HttpServletRequest httpServletRequest, Object body) {
@@ -32,7 +40,17 @@ public class LoggingServiceImpl implements LoggingService {
             stringBuilder.append("body=[" + body + "]");
         }
 
+        // Print logging to console & files
         log.info(stringBuilder.toString());
+
+        // Logging into Database Table
+        ApiLog apiLog = new ApiLog();
+        apiLog.setCorrId(MDC.get(CorrelationFilterConfig.DEFAULT_MDC_UUID_TOKEN_KEY));
+        apiLog.setApiUrl(httpServletRequest.getRequestURI());
+        apiLog.setRequestMessage(stringBuilder.toString());
+        apiLog.setRequestDate(Instant.now());
+        apiLog.setIpAddress(MDC.get(CorrelationFilterConfig.DEFAULT_MDC_CLIENT_IP_KEY));
+        apiLogMapper.insertApiLog(apiLog);
     }
 
     @Override
@@ -45,7 +63,15 @@ public class LoggingServiceImpl implements LoggingService {
         stringBuilder.append("responseHeaders=[").append(buildHeadersMap(httpServletResponse)).append("] ");
         stringBuilder.append("responseBody=[").append(body).append("] ");
 
+        // Print logging to console & files
         log.info(stringBuilder.toString());
+
+        // Logging into Database Table
+        ApiLog apiLog = new ApiLog();
+        apiLog.setCorrId(MDC.get(CorrelationFilterConfig.DEFAULT_MDC_UUID_TOKEN_KEY));
+        apiLog.setResponseMessage(stringBuilder.toString());
+        apiLog.setResponseDate(Instant.now());
+        apiLogMapper.updateApiLog(apiLog);
     }
 
     private Map<String, String> buildParametersMap(HttpServletRequest httpServletRequest) {

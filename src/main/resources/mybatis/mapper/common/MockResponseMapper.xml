@@ -1,0 +1,61 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.prolancer.validation.common.mapper.MockResponseMapper">
+
+    <resultMap id="mockResponseMap" type="MockResponse">
+        <id column="API_ID" property="apiId" />
+        <result column="DESCRIPTION" property="description" />
+        <result column="RESPONSE_TYPE" property="responseType" />
+        <result column="RESPONSE_BODY" property="responseBody" />
+    </resultMap>
+
+    <select id="selectMockResponse" resultMap="mockResponseMap">
+        SELECT /* net.prolancer.validation.mapper.MockResponseMapper.selectMockResponse */
+            API_ID
+             , DESCRIPTION
+             , RESPONSE_TYPE
+             , RESPONSE_BODY
+        FROM TB_API_MOCK_RESPONSE
+    </select>
+
+    <select id="selectMockResponseById" parameterType="String" resultMap="mockResponseMap">
+        SELECT /* net.prolancer.validation.mapper.MockResponseMapper.selectMockResponseById */
+            API_ID
+             , DESCRIPTION
+             , RESPONSE_TYPE
+             , RESPONSE_BODY
+        FROM TB_API_MOCK_RESPONSE
+        WHERE API_ID = #{apiId}
+    </select>
+
+    <select id="countMockResponseById" parameterType="String" resultType="int">
+        SELECT /* net.prolancer.validation.mapper.MockResponseMapper.selectMockResponseById */
+               COUNT(*)
+          FROM TB_API_MOCK_RESPONSE
+         WHERE API_ID = #{apiId}
+    </select>
+
+    <insert id="insertMockResponse" parameterType="MockResponse">
+        INSERT /* net.prolancer.validation.mapper.MockResponseMapper.insertMockResponse */
+        INTO TB_API_MOCK_RESPONSE (API_ID, DESCRIPTION, RESPONSE_TYPE, RESPONSE_BODY)
+        VALUES (#{apiId}, #{description}, #{responseType}, #{responseBody})
+    </insert>
+
+    <update id="updateMockResponse" parameterType="MockResponse">
+        UPDATE /* net.prolancer.validation.mapper.MockResponseMapper.updateMockResponse */
+            TB_API_MOCK_RESPONSE
+           SET DESCRIPTION = #{description}
+             , RESPONSE_TYPE = #{responseType}
+             , RESPONSE_BODY = #{responseBody}
+         WHERE API_ID = #{apiId}
+    </update>
+
+    <delete id="deleteMockResponse" parameterType="String">
+        DELETE /* net.prolancer.validation.mapper.MockResponseMapper.deleteMockResponse */
+          FROM TB_API_MOCK_RESPONSE
+        WHERE API_ID = #{apiId}
+    </delete>
+
+</mapper>

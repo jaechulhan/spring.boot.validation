@@ -1,0 +1,21 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.prolancer.validation.common.mapper.ApiLogMapper">
+
+    <insert id="insertApiLog" parameterType="ApiLog">
+        INSERT /* net.prolancer.validation.mapper.ApiLogMapper.insertApiLog */
+        INTO TB_API_LOG_HISTORY (CORR_ID, API_URL, REQUEST_MESSAGE, REQUEST_DATE, IP_ADDRESS)
+        VALUES (#{corrId}, #{apiUrl}, #{requestMessage}, #{requestDate}, #{ipAddress})
+    </insert>
+
+    <update id="updateApiLog" parameterType="ApiLog">
+        UPDATE /* net.prolancer.validation.mapper.ApiLogMapper.updateApiLog */
+            TB_API_LOG_HISTORY
+           SET RESPONSE_MESSAGE = #{responseMessage}
+             , RESPONSE_DATE = #{responseDate}
+         WHERE CORR_ID = #{corrId}
+    </update>
+
+</mapper>
