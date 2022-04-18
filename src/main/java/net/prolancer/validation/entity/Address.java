@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -16,13 +17,21 @@ public class Address {
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @JsonIgnore
     private String id;
+
     private String address;
+
+    @NotNull
     @NotEmpty
     private String city;
+    @NotNull
     @NotEmpty
     private String state;
+
+    @NotNull
     @NotEmpty
     private String country;
+
+    @NotNull
     @NotEmpty
     @Size(min = 5, max = 5, message = "{validation.zipcode.size.error}")
     private String zipcode;

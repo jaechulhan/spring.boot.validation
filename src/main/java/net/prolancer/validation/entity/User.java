@@ -6,10 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -22,12 +19,14 @@ public class User {
 
     // username should not be null or empty
     // username should have at least 2 characters
+    @NotNull
     @NotEmpty
-    @Size(min = 2, message = "{validation.username.size.error}")
+    @Size(min = 2, max= 255,  message = "{validation.username.size.error}")
     private String userName;
 
     // email should not be null or empty
     // email should be a valid email format
+    @NotNull
     @NotEmpty
     @Email
     private String email;
@@ -35,7 +34,7 @@ public class User {
     // password should not be null or empty
     // password should have at least 8 characters
     @NotEmpty
-    @Size(min = 8, message = "{validation.password.size.error}")
+    @Size(min = 8, max= 255, message = "{validation.password.size.error}")
     private String password;
 
     // birthday should not be null or empty
