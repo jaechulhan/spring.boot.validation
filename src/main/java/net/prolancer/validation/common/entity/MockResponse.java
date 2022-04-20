@@ -1,5 +1,7 @@
 package net.prolancer.validation.common.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -9,18 +11,23 @@ public class MockResponse {
     @NotNull
     @NotEmpty
     @Size(min = 36, max = 36)
+    @ApiModelProperty(notes = "API ID")
     private String apiId;
 
+
+    @ApiModelProperty(notes = "API Description")
     private String description;
 
     @NotNull
     @NotEmpty
     @Size(max = 10)
     @Pattern(regexp = "JSON|XML", flags = Pattern.Flag.CASE_INSENSITIVE)
+    @ApiModelProperty(notes = "Response Type (JSON or XML)")
     private String responseType;
 
     @NotNull
     @NotEmpty
+    @ApiModelProperty(notes = "Response Body Message")
     private String responseBody;
 
     public MockResponse() {
