@@ -18,7 +18,7 @@ public class Address {
     @JsonIgnore
     private String id;
 
-    private String address;
+    private String streetAddress;
 
     @NotNull
     @NotEmpty
@@ -39,8 +39,8 @@ public class Address {
     public Address() {
     }
 
-    public Address(String address, String city, String state, String country, String zipcode) {
-        this.address = address;
+    public Address(String streetAddress, String city, String state, String country, String zipcode) {
+        this.streetAddress = streetAddress;
         this.city = city;
         this.state = state;
         this.country = country;
@@ -55,12 +55,12 @@ public class Address {
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public String getStreetAddress() {
+        return streetAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
     }
 
     public String getCity() {
@@ -99,7 +99,7 @@ public class Address {
     public String toString() {
         return "Address{" +
                 "id=" + id +
-                ", address='" + address + '\'' +
+                ", streetAddress='" + streetAddress + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", country='" + country + '\'' +
