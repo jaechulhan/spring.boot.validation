@@ -2,18 +2,13 @@ package net.prolancer.validation.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.prolancer.validation.common.validator.CheckDateFormat;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
 
-@Entity
 public class User {
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @JsonIgnore
     private String userId;
 

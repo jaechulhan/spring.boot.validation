@@ -30,8 +30,20 @@ public class SwaggerWebMvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    public Docket settingsDocket() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("Settings")
+                .apiInfo(getApiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("net.prolancer.validation.common.controller"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+    @Bean
     public Docket apiDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("API")
                 .apiInfo(getApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("net.prolancer.validation.controller"))
