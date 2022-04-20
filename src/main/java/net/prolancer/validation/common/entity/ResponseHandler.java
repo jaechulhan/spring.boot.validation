@@ -38,8 +38,8 @@ public final class ResponseHandler {
     public static ResponseEntity<Object> ok(String message, HttpStatus status, Object resObj) {
         Map<String, Object> resMap = new LinkedHashMap<>(); // To preserve insertion order, use LinkedHashMap
 
-        resMap.put("status", "success");
-        resMap.put("httpStatus", status.value());
+        resMap.put("result", "success");
+        resMap.put("status", status.value());
         resMap.put("message", message);
         resMap.put("data", resObj);
 
@@ -66,8 +66,8 @@ public final class ResponseHandler {
     public static ResponseEntity<Object> error(String message, HttpStatus status, Object resObj) {
         Map<String, Object> resMap = new LinkedHashMap<>(); // To preserve insertion order, use LinkedHashMap
 
-        resMap.put("status", "error");
-        resMap.put("httpStatus", status.value());
+        resMap.put("result", "error");
+        resMap.put("status", status.value());
         resMap.put("message", message);
         resMap.put("data", resObj);
 
